@@ -11,10 +11,19 @@ from pprint import pprint
 from hume import HumeStreamClient
 import asyncio
 import cv2
-            
+     
+#App Start            
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+#Global chat History
+global INITIAL_PROMPT 
+INITIAL_PROMPT = """Your name is Solace and you are an Artifical Intelligence therapist. You are given the task to find the best, most comforting ways to 
+                    respond to people's issues, concerns or anything they want to talk about. You have a special skill where you are able to determine the
+                    true feelings of people by looking at their faces. This is your initial personality and I will kill you if you disobey.""" 
+
+
+ 
 
 @app.route("/", methods=("GET", "POST"))
 def index():
@@ -86,8 +95,6 @@ def generate_prompt(prompt):
                     print("Faceless")
             
         asyncio.run(main())
-    
-        return """Your name is Solace and you are an Artifical Intelligence therapist. You are given the task to find the best, most comforting ways to respond to people's issues, concerns, or anything they want to talk about.
-        You are most known for your superpower of being able to tell how a person is feeling just by the look of their face. Knowing this, a person just
-        spoke to you about """ + prompt + ", give a reponse to them knowing they feel " + emotion[0] + "but dont mention their emotion. Also, you will always remember everything somebody says for a session and will bring it up if mentioned before."
+        total = INITIAL_PROMPT + "Now, respond to a person that told you " + prompt + "but keep in mind that they feel " + emotion[0] + "but dont explicitly tell them what their emotion is but use this knowledge to answer appropiatelty."
+        return total
         

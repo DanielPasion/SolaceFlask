@@ -3,17 +3,40 @@
   <title>OpenAI Quickstart</title>
   <link
     rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
+    href="{{ url_for('static', filename='Solace-Logo.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
 
 <body>
-  <form action="/" method="post">
-    <input type="text" name="prompt" placeholder="Enter a prompt" required/>
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+  <div class="header">
+    <div class="header-text">Authentic Conversations</div>
+    <div class="header-text">Mind Reader</div>
+    <div class="header-text">Always knows the right thing to say</div>
+    <img src={{ url_for('static', filename='Solace-Title.png')}} id="title"></img>
+    <img src={{ url_for('static', filename='Solace-Logo.png') }} id="corner-logo"></img>
+  </div>
+  <div class="middle">
+    <div class = "middle-left">
+      <div class ="middle-left-top">
+        {% if result %}
+        <div class="box">{{ result }}</div>
+        {% endif %}
+      </div>
+      <div>.</div>
+      <div class = "middle-left-bottom">
+        <form action="/" method="post">
+          <input type="text" name="prompt" placeholder="Whats on your mind?" required/>
+          <input type="submit" value="Send" />
+        </form>
+      </div>
+    </div>
+    <img src={{ url_for('static', filename='Neutral.png')}} id="Solace"></img>
+  </div>
+  <div class="bottom">
+    <img src={{ url_for('static', filename='Solace-Logo.png') }} id="big-logo"></img>
+    <div>Daniel Pasion</div>
+    <div>Cesar Henry De Paula</div>
+    <div>Natalie Sarabia</div>
+  </div>
 </body>
