@@ -33,7 +33,7 @@ def index():
             model="text-davinci-003",
             prompt=generate_prompt(prompt),
             temperature=.6,
-            max_tokens=1000
+            max_tokens=100
         )
         return redirect(url_for("index", result=response.choices[0].text))
 
@@ -71,29 +71,29 @@ def findEmotion (result):
         if result[i]['score'] > max:
             max = result[i]['score']
             emotion = result[i]['name']
+    print [emotion,max]
     return [emotion,max]
 
 def generate_prompt(prompt):
     
     while (True):
         global emotion
-        emotion = ""
+        emotion = "normal"
         capture_image()
-
         async def main():
             client = HumeStreamClient("mPASmY2oLMgBm4X1UkE278lU6W8ILuOOvg7m8QFd5ADfucat")
             config = FaceConfig(identify_faces=True)
             async with client.connect([config]) as socket:
                 result = await socket.send_file("captured_image.jpg")
-                print(result['face'])
+                print(result['face']['predictions'])
                 try:
                     result['face']['predictions']
-                    global emotion
                     emotion = findEmotion(result['face']['predictions'][0]['emotions'][0])
-                    print(emotion[0])
+                    print(emotion)
                 except:
+                    result['face']['predictions']
                     print("Faceless")
-            
+
         asyncio.run(main())
         total = INITIAL_PROMPT + "Now, respond to a person that told you " + prompt + "but keep in mind that they feel " + emotion + "but dont explicitly tell them what their emotion is but use this knowledge to answer appropiatelty."
         return total

@@ -76,11 +76,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* background-color: purple; */
 }
 
 .middle-left-top{
-  /* background-color: orange; */
   display: flex;
   flex-direction: row;
   justify-content: center;
