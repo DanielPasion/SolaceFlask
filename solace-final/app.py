@@ -89,12 +89,12 @@ def generate_prompt(prompt):
                 try:
                     result['face']['predictions']
                     global emotion
-                    emotion = findEmotion(result['face']['predictions'][0]['emotions'])
+                    emotion = findEmotion(result['face']['predictions'][0]['emotions'][0])
                     print(emotion[0])
                 except:
                     print("Faceless")
             
         asyncio.run(main())
-        total = INITIAL_PROMPT + "Now, respond to a person that told you " + prompt + "but keep in mind that they feel " + emotion[0] + "but dont explicitly tell them what their emotion is but use this knowledge to answer appropiatelty."
+        total = INITIAL_PROMPT + "Now, respond to a person that told you " + prompt + "but keep in mind that they feel " + emotion + "but dont explicitly tell them what their emotion is but use this knowledge to answer appropiatelty."
         return total
         

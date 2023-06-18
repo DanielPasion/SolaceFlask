@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\oldri\Desktop\solace\openai-quickstart-python\.venv"
+VIRTUAL_ENV="C:\Users\oldri\Desktop\solace_final\solace-final\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
